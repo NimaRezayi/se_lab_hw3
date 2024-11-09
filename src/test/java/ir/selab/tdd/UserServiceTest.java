@@ -54,4 +54,25 @@ public class UserServiceTest {
         boolean login = userService.loginWithUsername("ahmad", "abcd");
         assertFalse(login);
     }
+
+    @Test
+    public void loginWithValidEmailAndPassword__ShouldSuccess() {
+        userService.registerUser("jane", "doe123", "jane@example.com");
+        boolean login = userService.loginWithEmail("jane@example.com", "doe123");
+        assertTrue(login);
+    }
+
+    @Test
+    public void loginWithInvalidEmailAndPassword__ShouldFail() {
+        userService.registerUser("john", "password123", "john@example.com");
+        boolean login = userService.loginWithEmail("john@example.com", "wrongpassword");
+        assertFalse(login);
+    }
+
+    @Test
+    public void loginWithNonExistentEmail__ShouldFail() {
+        boolean login = userService.loginWithEmail("nonexistent@example.com", "password123");
+        assertFalse(login);
+    }
+
 }
