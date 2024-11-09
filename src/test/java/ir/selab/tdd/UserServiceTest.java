@@ -75,4 +75,24 @@ public class UserServiceTest {
         assertFalse(login);
     }
 
+    @Test
+    public void changeUserEmail__ShouldUpdateEmail() {
+        userService.registerUser("ali", "password", "ali@oldemail.com");
+        boolean result = userService.changeUserEmail("ali", "ali@newemail.com");
+        assertTrue(result);
+
+        // Login with new email should succeed
+        boolean login = userService.loginWithEmail("ali@newemail.com", "password");
+        assertTrue(login);
+
+        // Login with old email should fail
+        login = userService.loginWithEmail("ali@oldemail.com", "password");
+        assertFalse(login);
+    }
+
+    @Test
+    public void changeEmailForNonExistentUser__ShouldFail() {
+        boolean result = userService.changeUserEmail("nonexistentUser", "newemail@example.com");
+        assertFalse(result);
+    }
 }
