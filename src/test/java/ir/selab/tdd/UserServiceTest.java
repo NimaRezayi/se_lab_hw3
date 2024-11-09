@@ -77,12 +77,12 @@ public class UserServiceTest {
 
     @Test
     public void changeUserEmail__ShouldUpdateEmail() {
-        userService.registerUser("ali", "password", "ali@oldemail.com");
-        boolean result = userService.changeUserEmail("ali", "ali@newemail.com");
+        userService.registerUser("nima", "password", "nima@oldemail.com");
+        boolean result = userService.changeUserEmail("nima", "nima@newemail.com");
         assertTrue(result);
 
         // Login with new email should succeed
-        boolean login = userService.loginWithEmail("ali@newemail.com", "password");
+        boolean login = userService.loginWithEmail("nima@newemail.com", "password");
         assertTrue(login);
 
         // Login with old email should fail

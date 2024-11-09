@@ -38,18 +38,14 @@ public class UserService {
     }
 
     public boolean removeUser(String username) {
-        // TODO: implement
-        return false;
+        return repository.removeUser(username);
     }
 
     public List<User> getAllUsers() {
-        // TODO: implement
-        return null;
+        return repository.getAllUsers();
     }
 
     public boolean changeUserEmail(String username, String newEmail) {
-        // TODO: implement (if user exists and user's email is valid, then change email)
-        // TODO: after changing user's email, user must be able to login with new email.
-        return false;
+        return repository.updateUserEmail(username, newEmail);
     }
 }
