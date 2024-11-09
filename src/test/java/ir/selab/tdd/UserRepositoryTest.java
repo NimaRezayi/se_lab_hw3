@@ -61,4 +61,22 @@ public class UserRepositoryTest {
         // Then
         assertEquals(oldUserCount + 1, repository.getUserCount());
     }
+
+    @Test
+    public void removeUser__ShouldDecreaseUserCount() {
+        int oldUserCount = repository.getUserCount();
+        repository.addUser(new User("reza", "123abc", "reza@example.com"));
+        assertEquals(oldUserCount + 1, repository.getUserCount());
+
+        repository.removeUser("reza");
+        assertEquals(oldUserCount, repository.getUserCount());
+    }
+
+    @Test
+    public void removeNonExistentUser__ShouldNotAffectUserCount() {
+        int oldUserCount = repository.getUserCount();
+        repository.removeUser("nonexistentUser");
+        assertEquals(oldUserCount, repository.getUserCount());
+    }
+
 }
