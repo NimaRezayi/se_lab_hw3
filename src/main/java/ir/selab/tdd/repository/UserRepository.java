@@ -44,9 +44,16 @@ public class UserRepository {
     }
 
     public boolean removeUser(String username) {
-        // TODO: implement
+        if (usersByUserName.containsKey(username)) {
+            User user = usersByUserName.remove(username);
+            if (user.getEmail() != null) {
+                usersByEmail.remove(user.getEmail());
+            }
+            return true;
+        }
         return false;
     }
+
 
 
 
