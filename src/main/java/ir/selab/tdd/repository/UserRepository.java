@@ -25,23 +25,30 @@ public class UserRepository {
     }
 
     public User getUserByEmail(String email) {
-        // TODO: implement
-        return null;
+        return usersByEmail.get(email);
     }
 
     public boolean addUser(User user) {
         if (usersByUserName.containsKey(user.getUsername())) {
             return false;
         }
-        // TODO: implement check email duplication
+        if (user.getEmail() != null && usersByEmail.containsKey(user.getEmail())) {
+            return false;
+        }
         usersByUserName.put(user.getUsername(), user);
+        if (user.getEmail() != null) {
+            usersByEmail.put(user.getEmail(), user);
+        }
         return true;
+
     }
 
     public boolean removeUser(String username) {
         // TODO: implement
         return false;
     }
+
+
 
     public int getUserCount() {
         return usersByUserName.size();
